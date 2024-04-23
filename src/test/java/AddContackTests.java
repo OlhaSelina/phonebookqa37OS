@@ -2,6 +2,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -27,6 +29,13 @@ public class AddContackTests extends BaseTest{
 
             // click on logon btn by //button[@name='login']
             driver.findElement(By.xpath("//button[@name='login']")).click();
+    }
+
+    @AfterClass
+    public  void  methodPostConditions(){
+        driver.findElement(
+                By.xpath("//div[contains(@class,'navbar-logged')]//button")).click();
+        driver.navigate().to("https://telranedu.web.app/home");
     }
 
     @Test
