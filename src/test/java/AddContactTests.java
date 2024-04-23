@@ -1,41 +1,32 @@
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.util.List;
 
-public class AddContackTests extends BaseTest{
+public class AddContactTests extends BaseTest{
     @BeforeClass
     public void preconditions(){
         //TODO
             // click on logon btn by //a[@href='/login']
-            driver.findElement(By.xpath("//a[@href='/login']")).click();
-            // fill email by //input[@name='email']
-            WebElement inputEmail = driver.findElement(By.xpath("//input[@name='email']"));
-            inputEmail.click(); // кликнуть в поле
-            inputEmail.clear();  // очистить поле инпута перед вводом наших значений
-            inputEmail.sendKeys("ledyolga@ukr.net");
+        clickLoginOnNavBar();
+        // fill email by //input[@name='email']
+        fillEmailOnLogin("ledyolga@ukr.net");
 
-            // fill password by //input[@name='password']
-            WebElement inputPassword = driver.findElement(By.xpath("//input[@name='password']"));
-            inputPassword.click(); // кликнуть в поле
-            inputPassword.clear();  // очистить поле инпута перед вводом наших значений
-            inputPassword.sendKeys("Qwerty123!@#");
+        // fill password by //input[@name='password']
+        fillPasswordOnLogin("Qwerty123!@#");
 
-            // click on logon btn by //button[@name='login']
-            driver.findElement(By.xpath("//button[@name='login']")).click();
+        // click on logon btn by //button[@name='login']
+        clickLoginBtn();
     }
 
     @AfterClass
     public  void  methodPostConditions(){
-        driver.findElement(
-                By.xpath("//div[contains(@class,'navbar-logged')]//button")).click();
-        driver.navigate().to("https://telranedu.web.app/home");
+        clickLogoutBtn();
+        navigateToHomePage();
     }
 
     @Test
