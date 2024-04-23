@@ -1,3 +1,4 @@
+import dto.UserDTO;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -14,13 +15,7 @@ public class AddContactTests extends BaseTest{
             // click on logon btn by //a[@href='/login']
         clickLoginOnNavBar();
         // fill email by //input[@name='email']
-        fillEmailOnLogin("ledyolga@ukr.net");
-
-        // fill password by //input[@name='password']
-        fillPasswordOnLogin("Qwerty123!@#");
-
-        // click on logon btn by //button[@name='login']
-        clickLoginBtn();
+        login(new UserDTO());
     }
 
     @AfterClass

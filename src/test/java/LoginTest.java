@@ -1,3 +1,4 @@
+import dto.UserDTO;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -16,13 +17,9 @@ public class LoginTest extends BaseTest {
         clickLoginOnNavBar();
         Thread.sleep(3000);
         // fill email by //input[@name='email']
-        fillEmailOnLogin("ledyolga@ukr.net");
 
-        // fill password by //input[@name='password']
-        fillPasswordOnLogin("Qwerty123!@#");
-
-        // click on logon btn by //button[@name='login']
-        clickLoginBtn();
+        UserDTO user = new UserDTO().setEmail("ledyolga@ukr.net").setPassword("Qwerty123!@#");
+        login(user);
 
         //validation - verification  by sing out //div[contains(@class,'navbar-logged')]//button
 
