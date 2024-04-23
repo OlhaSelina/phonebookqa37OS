@@ -1,5 +1,7 @@
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.AfterClass;
@@ -33,4 +35,12 @@ public class BaseTest  {
         driver.quit();
     }
 
+    public String getTextBase(WebElement element) {
+        return element.getText().trim(); //trim обрезает пробелы
+    }
+
+    public WebElement getElementHomePageText() {
+       return driver.findElement(By.cssSelector("div:nth-child(2) h1"));
+
+    }
 }

@@ -76,7 +76,7 @@ public class AddContackTests extends BaseTest{
 
         boolean res = false;  //перебираем лист и проверяем по номеру телефона, что у нас добавился контакт
         for (WebElement el:allPhones){
-            if (el.getText().trim().equals(numberPhone)){
+            if (getTextBase(el).equals(numberPhone)){
                 res = true;
                 break;
             }
