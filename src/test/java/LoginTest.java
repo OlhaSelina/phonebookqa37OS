@@ -18,7 +18,7 @@ public class LoginTest extends BaseTest {
         Thread.sleep(3000);
         // fill email by //input[@name='email']
 
-        UserDTO user = new UserDTO().setEmail("ledyolga@ukr.net").setPassword("Qwerty123!@#");
+
         login(user);
 
         //validation - verification  by sing out //div[contains(@class,'navbar-logged')]//button

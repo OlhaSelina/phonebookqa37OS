@@ -1,3 +1,4 @@
+import dto.ContactDTO;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import dto.UserDTO;
 import org.openqa.selenium.By;
@@ -10,11 +11,12 @@ import org.testng.annotations.BeforeSuite;
 
 
 import java.time.Duration;
+import java.util.List;
 
 public class BaseTest  {
 
    static WebDriver driver;
-
+    UserDTO user = new UserDTO().setEmail("ledyolga@ukr.net").setPassword("Qwerty123!@#");
     @BeforeSuite
     public static void init() {
         ChromeOptions chromeOptions = new ChromeOptions();
@@ -33,6 +35,10 @@ public class BaseTest  {
     @AfterSuite
     public static void tearDown(){
         driver.quit();
+    }
+
+    public void clickAddOnNavBar() {
+        driver.findElement(By.xpath("//a[@href='/add']")).click();
     }
 
     public String getTextBase(WebElement element) {
@@ -90,5 +96,72 @@ public class BaseTest  {
 
         // click on logon btn by //button[@name='login']
         clickLoginBtn();
+    }
+
+    public void pause(int time) {
+        try {
+            Thread.sleep(time);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    protected void addContact(ContactDTO contactDTO) {
+        fillNameOnAddContact(contactDTO.getName());
+        fillLastNameOnAddContact(contactDTO.getLastName());
+        fillPhoneOnAddContact(contactDTO.getPhone());
+        fillEmailOnAddContact(contactDTO.getEmail());
+        fillAddressOnAddContact(contactDTO.getAddress());
+        fillDescriptionOnAddContact(contactDTO.getDescription());
+
+        clickAddContact();
+    }
+
+    public boolean isContactDisplaysOnThePage(String phone) {
+        List<WebElement> allPhones = driver.findElements(By.xpath("//div[contains(@class,'contact-item_card')]//h3"));
+
+        boolean res = false;  //перебираем лист и проверяем по номеру телефона, что у нас добавился контакт
+        for (WebElement el:allPhones){
+            if (getTextBase(el).equals("5554567890")){
+                res = true;
+                break;
+            }
+        }
+        return res;
+    }
+
+    public void clickAddContact() {
+        driver.findElement(By.xpath("//div[contains(@class, 'add_form')]//button")).click();
+    }
+
+    public void fillDescriptionOnAddContact(String description) {
+        typeText(description, By.xpath("//input[@placeholder='description']") );
+    }
+
+    public void typeText(String text, By by) {
+        WebElement element = driver.findElement(by);
+        element.click();
+        element.clear();
+        element.sendKeys(text);
+    }
+
+    public void fillAddressOnAddContact(String address) {
+        typeText(address,By.xpath("//input[@placeholder='Address']") );
+    }
+
+    public void fillEmailOnAddContact(String email) {
+        typeText( email, By.xpath("//input[@placeholder='email']"));
+    }
+
+    public void fillPhoneOnAddContact(String phone) {
+        typeText(phone, By.xpath("//input[@placeholder='Phone']"));
+    }
+
+    public void fillLastNameOnAddContact(String lastName) {
+        typeText(lastName, By.xpath("//input[@placeholder='Last Name']") );
+    }
+
+    public void fillNameOnAddContact(String name) {
+        typeText(name, By.xpath("//input[@placeholder='Name']"));
     }
 }
