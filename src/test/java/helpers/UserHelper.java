@@ -12,16 +12,16 @@ public class UserHelper extends BaseHelper{
         super(driver);
     }
     By btnSignOut = By.xpath("//div[contains(@class,'navbar-logged')]//button");
+    By btnLogout = By.xpath("//div[contains(@class,'navbar-logged')]//button");
 
     public String getSignOutBtnText() {
         return getTextBaseByLocator(btnSignOut);
     }
 
     public void clickLogoutBtn() {
-        driver.findElement(
-                        By.xpath("//div[contains(@class,'navbar-logged')]//button"))
-                .click();
+                clickBase(btnLogout);
     }
+
 
     public void clickLoginOnNavBar() {
         driver.findElement(By.xpath("//a[@href='/login']")).click();

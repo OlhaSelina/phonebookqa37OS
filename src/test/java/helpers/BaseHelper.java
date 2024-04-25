@@ -21,7 +21,14 @@ WebDriver driver;
     }
 
     protected List<WebElement> findElementsBase(By by) {
-        return driver.findElements(by);
+          return driver.findElements(by);
+    }
+
+    protected void clickBase(By by){
+        findElementBase(by).click();
+    }
+    protected void clickBaseByElement(WebElement element){
+        element.click();
     }
 
     //-------------------------------------------
