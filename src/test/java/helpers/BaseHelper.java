@@ -1,6 +1,7 @@
 package helpers;
 
 import config.ApplicationManager;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -13,7 +14,8 @@ WebDriver driver;
     public BaseHelper(WebDriver driver) {
         this.driver = driver;
     }
-    // find elemnt / elements
+
+    // find elemnt / elements-----------
 
     protected WebElement findElementBase(By by) {
         System.out.println("Locator: findElement: " + by.toString());
@@ -50,8 +52,18 @@ WebDriver driver;
         element.sendKeys(text);
     }
 
-    //-------------------------
 
+    //-------------------------
+    // alerts----------
+    public String getTextAlert() {
+        Alert alert = driver.switchTo().alert();
+        return alert.getText().trim();
+    }
+    public void clickOkAlert() {
+        Alert alert = driver.switchTo().alert();
+        alert.accept();
+    }
+//----------------
     public void pause(int time) {
         try {
             Thread.sleep(time);
